@@ -5,8 +5,6 @@ export type Env = CloudflareBindings;
 
 const app = new Hono<{ Bindings: Env }>();
 
-app.get("/", (c) => c.text("Hello from Hono on Cloudflare Workers 🔥"));
-
 const requireApiKey = (c: Context, next: Next) => {
   const key = c.req.header("x-api-key");
 
@@ -57,5 +55,3 @@ app.post("/classify/raw", requireApiKey, async (c) => {
 
   return c.json({ response: result });
 });
-
-export default app;
